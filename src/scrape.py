@@ -39,7 +39,7 @@ def get_tables_from_bs4(web_content):
     return tables   
 
 def get_formatted_for_syzkaller(table_data):
-    """Prints the table data formatted for syzkaller, with a new line every 4 cells"""
+    """returns the table data formatted for syzkaller, with a new line every 4 cells"""
     """on syzkaller db, the meaningful data seems to be in seperate rows, but is treated as one row"""
 
     content = ""
@@ -66,3 +66,5 @@ def get_formatted_for_syzkaller(table_data):
             content += row_str
     
     return content 
+
+
