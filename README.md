@@ -1,4 +1,5 @@
 # research_subp
+Students: Ryan Mangeno, Shanna Byrd, Anthony Mahon.
 
 ```bash
 # clone the repository
