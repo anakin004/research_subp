@@ -55,16 +55,22 @@ def get_formatted_for_syzkaller(table_data):
     
 
     if cells:
-        # collecting the cell text, strip extra spaces, and put them in a list
+        
+        # put the cells in chunks of 4, separated by ' | ', then add a newline
         cell_texts = []
-        for cell in cells:
-            cell_texts.append(cell.text.strip())
+        
+
+        for i in range(0, len(cells), 4):
+
+            for j in range(4):
+                cell_texts.append(cells[i+j].text.strip())
             
-        # print the cells in chunks of 4, separated by ' | ', then add a newline
-        for i in range(0, len(cell_texts), 4):
-            row_str = ' | '.join(cell_texts[i:i+4]) + '\n'
+            # Join the 4 cell texts with ' | ' and add a newline
+            row_str = ' | '.join(cell_texts) + '\n'
             content += row_str
-    
+            cell_texts = []  
+
+
     return content 
 
 

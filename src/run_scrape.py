@@ -7,4 +7,4 @@ web_content = get_web_content(url)
 if web_content:
     table_data = get_tables_from_bs4(web_content)
     content = get_formatted_for_syzkaller(table_data)
-    save_to_file(content, "syzkaller_db.txt")
+    save_to_file(content, "scraped_data/syzkaller_db.txt")
