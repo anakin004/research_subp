@@ -69,8 +69,29 @@ def get_formatted_for_syzkaller(table_data):
             row_str = ' | '.join(cell_texts) + '\n'
             content += row_str
             cell_texts = []  
+    
+    return content
 
+def get_formatted_for_cve_db(table_data):
+        
+    content = ""
 
-    return content 
+    # cve db treats all cve bugs in table as one row, the row being the third row on the webpage html
+    row = table_data[2]
+    cells = row.find_all('td')
+
+    # group cells by two
+    for i in range(0, len(cells), 2):
+        
+        formatted_cell1_text = cells[i].text.strip()
+        formatted_cell2_text = cells[i+1].text.strip()
+
+        # the delimeter matters here since the description of cve bug can have characters like | that was used for syzkaller scrape
+        # substrings like "||", "->" and "::" exist in some of the text so one needs to found in order to efficiently parse data
+        # I ran a script to find the substring ":::" in any of the cells and there wasnt any so ::: is the designated delimeter
+        content += f"{formatted_cell1_text} ::: {formatted_cell2_text}\n"
+
+    return content
+
 
 
